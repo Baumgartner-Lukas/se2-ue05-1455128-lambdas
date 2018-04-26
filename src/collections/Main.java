@@ -32,31 +32,17 @@ public class Main {
         List<Integer> bright = list.filter(i -> i > 70);
         System.out.println("Dunkel: " + dark.size());
         System.out.println("Mittel: " + medium.size());
-        System.out.println("Hell: " + bright.size());
+        System.out.println("Hell: " + bright.size() + "\n");
 
-        System.out.println("");
+        System.out.printf("Max Value: %d%n%n", list.reduce(0, (a, b) -> a > b ? a : b));
 
-        System.out.println("Reduce list to find max value: ");
-        int max = list.reduce(0, (a, b) -> a > b ? a : b);
-        System.out.println("Max: " + max);
+        System.out.printf("If brightness is < 50 map value to N(no charge) else to C (charge) %n%s%n%n",
+                list.map(i -> i < 50 ? "N" : "C").reduce("", (a,b) -> a + b));
 
-        System.out.println("");
-
-        System.out.println("If brightness is < 50 map value to N(no charge) else to C (charge)");
-        list.map(i -> i < 50 ? "N" : "C").forEach(System.out::print);
-
-        System.out.println("");
-
-        double loadingValue = list.filter(i -> i > 50)
+        System.out.printf("Daily energy production %.0f%n", list.filter(i -> i >= 50)
                 .map(i -> Math.pow((0.01 * i), 2))
-                .filter(i -> i <= 0.5)
-                .reduce(0.0, (a,b) -> a+b);
-        System.out.println("\nDaily energy production "+ loadingValue);
-
-
-
-        System.out.println("");
-
+                .filter(i -> i < 0.5)
+                .reduce(0.0, (a,b) -> a+b));
 
         System.out.println("\nPrint extreme brightness (value >= 80): ");
         list.filter(i -> i >= 80).forEach(i -> System.out.println("Extreme Helligkeit: " + i));

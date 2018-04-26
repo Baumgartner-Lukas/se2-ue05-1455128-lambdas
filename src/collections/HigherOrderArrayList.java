@@ -65,11 +65,11 @@ public final class HigherOrderArrayList<T> extends ArrayList<T> {
      */
     @Override
     public T reduce(T identity, BinaryOperator<T> accumulator) {
-        T reducedList = null;
+        T reducedValue = null;
         for (T elem : this) {
-            reducedList = accumulator.apply(identity, elem);
-            identity = reducedList;
+            reducedValue = accumulator.apply(identity, elem);
+            identity = reducedValue;
         }
-        return reducedList;
+        return reducedValue;
     }
 }
